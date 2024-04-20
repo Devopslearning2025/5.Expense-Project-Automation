@@ -3,6 +3,7 @@
 USERID=$(id -u)
 SCRIPT_NAME=$(echo $0|cut -d '.' -f1)
 DATE=$(date +%F-%H-%M-%S)
+#LOGFILE=/tmp/$SCRIPT_NAME-$DATE.log
 LOGFILE=/tmp/$SCRIPT_NAME-$DATE.log
 R="\e[31m"
 G="\e[32m"
