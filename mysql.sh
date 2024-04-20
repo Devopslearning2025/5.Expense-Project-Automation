@@ -12,6 +12,7 @@ N="\e[0m"
 if [ $USERID -ne 0 ]
 then
     echo "Please run with root user"
+    exit 1
 else
     echo "you are with root user"
 fi
@@ -28,3 +29,12 @@ VALIDATE(){
 
 dnf install mysql-server -y &>>$LOGFILE
 VALIDATE $? "installing my sql server"
+
+systemctl enable mysqld &>>$LOGFILE
+VALIDATE $? "enabling my sql server"
+
+systemctl start mysqld &>>$LOGFILE
+VALIDATE $? "startng my sql server"
+
+mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+VALIDATE $? "settign the password"
