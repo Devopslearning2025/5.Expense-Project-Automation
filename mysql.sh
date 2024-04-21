@@ -3,17 +3,16 @@
 USERID=$(id -u)
 SCRIPT_NAME=$(echo $0|cut -d '.' -f1)
 DATE=$(date +%F-%H-%M-%S)
-#LOGFILE=/tmp/$SCRIPT_NAME-$DATE.log
-LOGFILE=/tmp/$SCRIPT_NAME-$DATE.log
+LOGFILE=/tmp/$SCRIPT_NAME/$DATE.log
 R="\e[31m"
 G="\e[32m"
-Y="\e[33m"
-N="\e[0m"
+Y="\e[33"
+N="\e[0m]"
+echo "starting $SCRIPT_NAME at $DATE"
 
 if [ $USERID -ne 0 ]
 then
-    echo "Please run with root user"
-    exit 1
+    echo "please run with root user"
 else
     echo "you are with root user"
 fi
@@ -21,21 +20,20 @@ fi
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo  -e "$2 is ... $R FAILURE $N"
-        #exit 1
+        echo "$2 is .... FAILURE"
     else
-        echo -e "$2 is ... $G SUCCESS $N"
-    fi   
+        echo "$2 is .... SUCCESS"
+    fi        
 }
 
 dnf install mysql-server -y &>>$LOGFILE
-VALIDATE $? "installing my sql server"
+VALIDATE $? "Installing mysql"
 
 systemctl enable mysqld &>>$LOGFILE
-VALIDATE $? "enabling my sql server"
+VALIDATE $? "enabling mysql"
 
 systemctl start mysqld &>>$LOGFILE
-VALIDATE $? "startng my sql server"
+VALIDATE $? "starting mysql"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-VALIDATE $? "settign the password"
+VALIDATE $? "setting root password of mysql"
