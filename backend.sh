@@ -72,7 +72,7 @@ VALIDATE $? "enabled backend"
 dnf install mysql -y
 VALIDATE $? "installed mysql client"
 
-mysql -h 172.31.24.255 -uroot -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h db.devopslearning2025.online -uroot -pExpenseApp@1 < /app/schema/backend.sql
 VALIDATE $? "schema loaded"
 
 systemctl restart backend
