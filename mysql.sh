@@ -40,9 +40,8 @@ VALIDATE $? "starting mysql"
 mysql -h 3.82.25.15 -uroot -pExpenseApp@1 -e 'show databases'; &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    echo -e "mysql passowrd already set ....$Y SKIPPING  $N"
-else
-    echo "set the password"
     mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
     VALIDATE $? "setting root password of mysql"
-fi
+else
+    echo -e "mysql passowrd already set ....$Y SKIPPING  $N"
+fi  
