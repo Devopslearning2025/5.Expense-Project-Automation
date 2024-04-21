@@ -53,7 +53,7 @@ VALIDATE $? "download is completed"
 cd /app 
 rm -rf /app/*
 unzip /tmp/backend.zip &>>$LOGFILE
-VALIDATE $? "unzipped completed"
+VALIDATE $? "extracted backend.zip is completed"
 
 npm install &>>$LOGFILE
 VALIDATE $? "npm dependices install completed"
