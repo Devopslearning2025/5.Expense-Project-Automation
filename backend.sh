@@ -41,7 +41,7 @@ then
     useradd expense &>>$LOGFILE
     VALIDATE $? "user created"
 else
-    echo -e "$G user is already there .... $Y SKIPPING $N"
+    echo -e "User is already there .... $Y SKIPPING $N"
 fi    
 
 #mkdir /app &>>$LOGFILE
