@@ -9,6 +9,8 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 echo "starting $SCRIPT_NAME shell script  at $DATE"
+echo "Enter the MySQL Password"
+read -s MySQL-Password
 
 if [ $USERID -ne 0 ]
 then
@@ -29,19 +31,20 @@ VALIDATE(){
 }
 
 dnf install mysql-server -y &>>$LOGFILE
-VALIDATE $? "Installing mysql"
+VALIDATE $? "Installing MySQL"
 
 systemctl enable mysqld &>>$LOGFILE
-VALIDATE $? "enabling mysql"
+VALIDATE $? "enabling MYSQL"
 
 systemctl start mysqld &>>$LOGFILE
-VALIDATE $? "starting mysql"
+VALIDATE $? "starting MySQL"
 
-mysql -h 3.82.25.15 -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+#mysql -h 3.82.25.15 -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h 3.82.25.15 -uroot -p{MySQL-Password} -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-    VALIDATE $? "setting root password of mysql"
+    mysql_secure_installation --set-root-pass ${MySQL-Password} &>>$LOGFILE
+    VALIDATE $? "setting root password of MySQL"
 else
-    echo -e "mysql passowrd already set ....$Y SKIPPING  $N"
+    echo -e "MySQL passowrd already set ....$Y SKIPPING  $N"
 fi  
