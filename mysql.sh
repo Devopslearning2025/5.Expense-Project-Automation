@@ -21,10 +21,10 @@ fi
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo "$2 is .... FAILURE"
+        echo -e "$2 is .... $R FAILURE $N"
         exit 1
     else
-        echo "$2 is .... SUCCESS"
+        echo -e "$2 is .... $G SUCCESS $N"
     fi        
 }
 
@@ -40,7 +40,7 @@ VALIDATE $? "starting mysql"
 mysql -h 3.82.25.15 -uroot -pExpenseApp@1 -e 'show databases'; &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    echo "mysql passowrd already set .... SKIPPING"
+    echo -e "mysql passowrd already set ....$Y SKIPPING  $N"
 else
     echo "set the password"
     mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
