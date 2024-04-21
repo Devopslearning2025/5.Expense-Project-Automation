@@ -17,6 +17,14 @@ else
     echo "you are with root user"
 fi
 
+VALIDATE(){
+    if [ $1 is -ne 0 ]
+    then
+        echo -e "$2 is ... $R FAILURE $N"
+    else
+        echo -e "$2 is ... $G SUCCESS $N"
+}
+
 dnf install nginx -y  &>>$LOGFILE
 VALIDATE $? "Installing nginx"
 
