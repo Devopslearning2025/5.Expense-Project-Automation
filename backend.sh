@@ -7,6 +7,8 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+echo "Enter DB password"
+read -s "mysql_password"
 
 if [ $USERID -ne 0 ]
 then
@@ -73,7 +75,7 @@ VALIDATE $? "enabled backend"
 dnf install mysql -y  &>>$LOGFILE
 VALIDATE $? "installed mysql client"
 
-mysql -h db.devopslearning2025.online -uroot -pExpenseApp@1 < /app/schema/backend.sql  &>>$LOGFILE
+mysql -h db.devopslearning2025.online -uroot -p${mysql_password} < /app/schema/backend.sql  &>>$LOGFILE
 VALIDATE $? "schema loaded"
 
 systemctl restart backend  &>>$LOGFILE
