@@ -6,8 +6,8 @@ DATE=$(date +%F-%H-%M-%S)
 LOGFILE=/tmp/$SCRIPT_NAME-$DATE.log
 R="\e[31m"
 G="\e[32m"
-Y="\e[33"
-N="\e[0m]"
+Y="\e[33m"
+N="\e[0m"
 echo "starting $SCRIPT_NAME shell script  at $DATE"
 
 if [ $USERID -ne 0 ]
