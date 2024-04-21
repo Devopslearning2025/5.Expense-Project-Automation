@@ -35,8 +35,14 @@ VALIDATE $? "enabled nodejs:20"
 dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "install nodejs"
 
-useradd expense &>>$LOGFILE
-VALIDATE $? "user created"
+id expense &>>$LOGFILE
+if [ $? -ne 0 ]
+then
+    useradd expense &>>$LOGFILE
+    VALIDATE $? "user created"
+else
+    echo -e "$G user is already there .... $Y SKIPPING $N"
+fi    
 
 #mkdir /app &>>$LOGFILE
 #cd /app 
