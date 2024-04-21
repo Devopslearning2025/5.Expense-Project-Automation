@@ -22,6 +22,7 @@ VALIDATE(){
     if [ $1 -ne 0 ]
     then
         echo "$2 is .... FAILURE"
+        exit 1
     else
         echo "$2 is .... SUCCESS"
     fi        
@@ -36,5 +37,12 @@ VALIDATE $? "enabling mysql"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "starting mysql"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-VALIDATE $? "setting root password of mysql"
+mysql -h 3.82.25.15 -uroot -pExpenseApp@1 -e 'show databases'; &>>$LOGFILE
+if [ $? -ne 0 ]
+then
+    echo "mysql passowrd already set .... SKIPPING"
+else
+    echo "set the password"
+    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+    VALIDATE $? "setting root password of mysql"
+fi
