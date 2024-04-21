@@ -8,8 +8,8 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-echo "starting $SCRIPT_NAME shell script  at $DATE"
-echo "Enter the MySQL Password"
+#echo "starting $SCRIPT_NAME shell script  at $DATE"
+echo "Enter the DB Password:"
 read -s mysql-password
 
 if [ $USERID -ne 0 ]
