@@ -44,7 +44,8 @@ else
     echo -e "User is already there .... $Y SKIPPING $N"
 fi    
 
-#mkdir /app &>>$LOGFILE
+mkdir /app &>>$LOGFILE
+VALIDATE $? "directory is created"
 #cd /app 
 #curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
 #unzip /tmp/backend.zip
