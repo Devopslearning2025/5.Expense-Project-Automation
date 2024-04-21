@@ -46,6 +46,34 @@ fi
 
 mkdir -p /app &>>$LOGFILE
 VALIDATE $? "directory is created"
-#cd /app 
-#curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-#unzip /tmp/backend.zip
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOGFILE
+VALIDATE $? "download is completed"
+
+cd /app 
+unzip /tmp/backend.zip &>>$LOGFILE
+VALIDATE $? "unzipped completed"
+
+npm install &>>$LOGFILE
+VALIDATE $? "npm dependices install completed"
+
+cp /home/ec2-user/Project-Automation/backend.service /etc/systemd/system/backend.service
+VALIDATE $? "copied backend.servce"
+
+systemctl daemon-reload
+VALIDATE $? "daemon-reload"
+
+systemctl start backend
+VALIDATE $? "started backend"
+
+systemctl enable backend
+VALIDATE $? "enabled backend"
+
+dnf install mysql -y
+VALIDATE $? "installed mysql client"
+
+mysql -h 172.31.24.255 -uroot -pExpenseApp@1 < /app/schema/backend.sql
+VALIDATE $? "schema loaded"
+
+systemctl restart backend
+VALIDATE $? "restarted backend"
