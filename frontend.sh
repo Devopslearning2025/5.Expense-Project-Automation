@@ -18,7 +18,7 @@ else
 fi
 
 VALIDATE(){
-    if [ $1 is -ne 0 ]
+    if [ $? -ne 0 ]
     then
         echo -e "$2 is ... $R FAILURE $N"
     else
