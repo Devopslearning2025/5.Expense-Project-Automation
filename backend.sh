@@ -57,23 +57,23 @@ VALIDATE $? "unzipped completed"
 npm install &>>$LOGFILE
 VALIDATE $? "npm dependices install completed"
 
-cp /home/ec2-user/Project-Automation/backend.service /etc/systemd/system/backend.service
+cp /home/ec2-user/Project-Automation/backend.service /etc/systemd/system/backend.service  &>>$LOGFILE
 VALIDATE $? "copied backend.servce"
 
-systemctl daemon-reload
+systemctl daemon-reload  &>>$LOGFILE
 VALIDATE $? "daemon-reload"
 
-systemctl start backend
+systemctl start backend  &>>$LOGFILE
 VALIDATE $? "started backend"
 
-systemctl enable backend
+systemctl enable backend  &>>$LOGFILE
 VALIDATE $? "enabled backend"
 
-dnf install mysql -y
+dnf install mysql -y  &>>$LOGFILE
 VALIDATE $? "installed mysql client"
 
-mysql -h db.devopslearning2025.online -uroot -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h db.devopslearning2025.online -uroot -pExpenseApp@1 < /app/schema/backend.sql  &>>$LOGFILE
 VALIDATE $? "schema loaded"
 
-systemctl restart backend
+systemctl restart backend  &>>$LOGFILE
 VALIDATE $? "restarted backend"
