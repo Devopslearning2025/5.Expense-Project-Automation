@@ -40,7 +40,6 @@ systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "starting MySQL"
 
 #mysql -h 172.31.24.255 -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
-#mysql -h 172.31.24.255 -uroot -p${mysql_password} -e 'show databases;' &>>$LOGFILE
 mysql -h db.devopslearning2025.online -uroot -p${mysql_password} -e 'show databases;' &>>$LOGFILE
 
 if [ $? -ne 0 ]
