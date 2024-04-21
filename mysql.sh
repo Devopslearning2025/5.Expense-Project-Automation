@@ -13,6 +13,7 @@ echo "starting $SCRIPT_NAME shell script  at $DATE"
 if [ $USERID -ne 0 ]
 then
     echo "please run with root user"
+    exit 1
 else
     echo "you are with root user"
 fi
