@@ -10,7 +10,7 @@ Y="\e[33m"
 N="\e[0m"
 #echo "starting $SCRIPT_NAME shell script  at $DATE"
 echo "Enter the DB Password"
-read -s mysql-password
+read -s mysql_password
 
 if [ $USERID -ne 0 ]
 then
